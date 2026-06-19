@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreyas — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #EEF2F6;
+    --bg-panel: #E4EAF1;
+    --ink: #16202B;
+    --blue: #2C5F8A;
+    --blue-dark: #1B3A5C;
+    --accent: #C7672B;
+    --accent-soft: rgba(199,103,43,0.10);
+    --muted: #5B6B7A;
+    --line: #B9C5D1;
+    --white: #FFFFFF;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Source Serif 4', serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(238,242,246,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 880px; margin: 0 auto; padding: 14px 24px;
+    display:flex; align-items:center; justify-content: space-between;
+  }
+  .nav-mark{
+    font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em;
+    color: var(--blue-dark); font-weight: 500;
+  }
+  .nav-links{ display:flex; gap: 22px; list-style:none; }
+  .nav-links a{
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.05em;
+    color: var(--muted); text-decoration:none; text-transform: uppercase;
+  }
+  .nav-links a:hover{ color: var(--accent); }
+  .nav-toggle{ display:none; background:none; border:1px solid var(--line); border-radius:3px; padding:6px 10px; font-family:var(--font-mono); font-size:12px; color:var(--blue-dark); cursor:pointer; }
+
+  @media (max-width: 680px){
+    .nav-links{ display:none; flex-direction:column; gap:14px; position:absolute; top:100%; left:0; right:0; background:var(--bg); border-bottom:1px solid var(--line); padding:18px 24px; }
+    .nav-links.open{ display:flex; }
+    .nav-toggle{ display:inline-block; }
+  }
+
+  /* ---------- title block (hero) ---------- */
+  header.titleblock{ padding: 56px 0 32px; }
+  .tb-frame{
+    border: 1.5px solid var(--blue-dark);
+    background: var(--white);
+  }
+  .tb-top{
+    padding: 28px 28px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tb-eyebrow{
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .tb-name{
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(34px, 6vw, 52px); letter-spacing: -0.01em;
+    color: var(--blue-dark); line-height: 1.05;
+  }
+  .tb-tagline{
+    font-family: var(--font-body); font-style: italic;
+    font-size: 18px; color: var(--muted); margin-top: 10px; max-width: 520px;
+  }
+  .tb-grid{
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .tb-cell{
+    padding: 14px 18px; border-right: 1px solid var(--line); border-top: 1px solid var(--line);
+  }
+  .tb-cell:nth-child(4n){ border-right: none; }
+  .tb-label{
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.07em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .tb-value{
+    font-family: var(--font-mono); font-size: 13px; color: var(--ink); font-weight: 500;
+  }
+  .tb-value a{ color: var(--blue); text-decoration: none; border-bottom: 1px dotted var(--blue); }
+  .tb-value a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 600px){
+    .tb-grid{ grid-template-columns: repeat(2, 1fr); }
+    .tb-cell:nth-child(2n){ border-right: none; }
+    .tb-cell:nth-child(4n){ border-right: 1px solid var(--line); }
+  }
+
+  /* ---------- sections ---------- */
+  section{ padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom: none; }
+
+  .sec-head{ display:flex; align-items:baseline; gap: 14px; margin-bottom: 30px; }
+  .sec-tag{
+    font-family: var(--font-mono); font-size: 12px; color: var(--accent);
+    border: 1px solid var(--accent); padding: 3px 9px; letter-spacing: 0.05em;
+  }
+  .sec-title{
+    font-family: var(--font-display); font-weight: 700; font-size: 26px; color: var(--blue-dark);
+  }
+
+  .reveal{ opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity: 1; transform: translateY(0); }
+
+  /* profile */
+  .profile-text{ max-width: 640px; font-size: 18px; color: var(--ink); }
+  .profile-text p{ margin-bottom: 14px; }
+  .profile-text strong{ color: var(--blue-dark); font-weight: 600; }
+
+  /* skills / bom */
+  .bom-table{ width:100%; border-collapse: collapse; }
+  .bom-table thead th{
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--blue-dark);
+  }
+  .bom-table tbody td{
+    padding: 12px 10px; border-bottom: 1px solid var(--line); font-size: 15px; vertical-align: middle;
+  }
+  .bom-table tbody tr:hover{ background: var(--accent-soft); }
+  .bom-cat{ font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+  .bom-item{ font-weight: 600; color: var(--ink); }
+  .ruler{ display:flex; gap: 3px; }
+  .tick{ width: 14px; height: 9px; background: var(--line); border-radius: 1px; }
+  .tick.fill{ background: var(--blue); }
+
+  /* projects / case files */
+  .case-grid{ display:grid; gap: 22px; }
+  .case{
+    background: var(--white); border: 1px solid var(--line);
+    padding: 24px 26px; position: relative;
+  }
+  .case::before{
+    content: ''; position:absolute; top:0; left:0; width: 5px; height: 100%; background: var(--blue);
+  }
+  .case-id{ font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 6px; }
+  .case-title{ font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--blue-dark); margin-bottom: 8px; }
+  .case-tools{ display:flex; gap:8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .pill{ font-family: var(--font-mono); font-size: 11px; color: var(--blue-dark); background: var(--bg-panel); border: 1px solid var(--line); padding: 3px 9px; border-radius: 2px; }
+  .case p{ font-size: 15.5px; color: var(--ink); margin-bottom: 10px; }
+  .case .insight{ font-size: 14.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 6px; }
+  .case .insight strong{ color: var(--blue-dark); }
+  .case a.link{ font-family: var(--font-mono); font-size: 12px; color: var(--blue); text-decoration:none; display:inline-block; margin-top:10px; }
+  .case a.link:hover{ color: var(--accent); }
+  .placeholder-note{ font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+
+  /* timeline / experience */
+  .timeline{ position: relative; padding-left: 28px; }
+  .timeline::before{ content:''; position:absolute; left: 6px; top: 6px; bottom: 6px; width: 1px; background: var(--line); }
+  .t-item{ position: relative; margin-bottom: 36px; }
+  .t-item::before{
+    content:''; position:absolute; left: -28px; top: 4px; width: 11px; height: 11px;
+    background: var(--white); border: 2px solid var(--blue); border-radius: 50%;
+  }
+  .t-role{ font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--blue-dark); }
+  .t-org{ font-family: var(--font-mono); font-size: 13px; color: var(--accent); margin-top: 2px; }
+  .t-date{ font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .t-desc{ font-size: 15.5px; margin-top: 8px; max-width: 600px; }
+
+  /* education / credentials */
+  .cred-list{ display:grid; gap: 16px; }
+  .cred{ display:flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 14px; gap: 16px; flex-wrap: wrap; }
+  .cred-name{ font-weight: 600; font-size: 16.5px; color: var(--ink); }
+  .cred-org{ font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  .cred-year{ font-family: var(--font-mono); font-size: 12px; color: var(--accent); white-space: nowrap; }
+
+  /* contact / spec sheet footer */
+  footer{ padding: 56px 0 70px; }
+  .spec-frame{ border: 1.5px solid var(--blue-dark); background: var(--white); padding: 30px 28px; }
+  .spec-row{ display:flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); flex-wrap: wrap; gap: 8px; }
+  .spec-row:last-child{ border-bottom: none; }
+  .spec-label{ font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .spec-value{ font-family: var(--font-mono); font-size: 14px; color: var(--blue-dark); }
+  .spec-value a{ color: var(--blue-dark); text-decoration: none; border-bottom: 1px dotted var(--blue); }
+  .spec-value a:hover{ color: var(--accent); }
+  .resume-btn{
+    display:inline-block; margin-top: 22px; font-family: var(--font-mono); font-size: 13px;
+    color: var(--white); background: var(--blue-dark); padding: 12px 22px; text-decoration:none;
+    letter-spacing: 0.05em; border: 1px solid var(--blue-dark);
+  }
+  .resume-btn:hover{ background: var(--accent); border-color: var(--accent); }
+  .rev-stamp{
+    margin-top: 26px; font-family: var(--font-mono); font-size: 11px; color: var(--muted);
+    display:flex; justify-content: space-between;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition: none; opacity: 1; transform: none; }
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-mark">SHREYAS / PORTFOLIO</span>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">MENU</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="titleblock">
+    <div class="tb-frame">
+      <div class="tb-top">
+        <div class="tb-eyebrow">Personal portfolio — drawing no. 01</div>
+        <div class="tb-name">Shreyas</div>
+        <div class="tb-tagline">Operations, finance &amp; data analytics — built on an engineer's instinct for how systems behave.</div>
+      </div>
+      <div class="tb-grid">
+        <div class="tb-cell"><div class="tb-label">Drawn by</div><div class="tb-value">Shreyas</div></div>
+        <div class="tb-cell"><div class="tb-label">Discipline</div><div class="tb-value">Ops · Finance · Data</div></div>
+        <div class="tb-cell"><div class="tb-label">Based in</div><div class="tb-value">Bengaluru, IN</div></div>
+        <div class="tb-cell"><div class="tb-label">Sheet</div><div class="tb-value">01 of 01</div></div>
+        <div class="tb-cell"><div class="tb-label">Email</div><div class="tb-value"><a href="mailto:your.email@example.com">your.email@example.com</a></div></div>
+        <div class="tb-cell"><div class="tb-label">Phone</div><div class="tb-value">+91 [Add number]</div></div>
+        <div class="tb-cell"><div class="tb-label">LinkedIn</div><div class="tb-value"><a href="#">/in/[add-handle]</a></div></div>
+        <div class="tb-cell"><div class="tb-label">GitHub</div><div class="tb-value"><a href="#">/[add-handle]</a></div></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="profile">
+    <div class="sec-head reveal">
+      <span class="sec-tag">01</span>
+      <span class="sec-title">Profile</span>
+    </div>
+    <div class="profile-text reveal">
+      <p>Trained as a <strong>mechanical engineer</strong> first — learning to read systems by how they behave under load. An <strong>MBA in Finance &amp; Operations</strong> turned that instinct toward business: how performance gets measured, where it breaks down, and what to do about it.</p>
+      <p>Right now that shows up as a working comfort with <strong>Excel, Power BI, SQL and Python</strong> — applying the same rigour that used to go into stress calculations to spreadsheets, dashboards and term-deposit datasets instead. Currently building this further through a Business Analytics &amp; Consulting certificate program with UpGrad and PwC Academy.</p>
+      <p>Looking for roles in <strong>data &amp; systems, project management, or financial planning</strong> — places where structured thinking and a comfort with detail are part of the job, not an extra.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head reveal">
+      <span class="sec-tag">02</span>
+      <span class="sec-title">Bill of materials — skills</span>
+    </div>
+    <div class="reveal">
+      <table class="bom-table">
+        <thead>
+          <tr><th>Category</th><th>Tool / skill</th><th>Working level</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="bom-cat">Analytics &amp; BI</td><td class="bom-item">Excel — pivot tables, advanced formulas</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div></div></td></tr>
+          <tr><td class="bom-cat">Analytics &amp; BI</td><td class="bom-item">Power BI — DAX, data modeling</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div><div class="tick"></div></div></td></tr>
+          <tr><td class="bom-cat">Analytics &amp; BI</td><td class="bom-item">SQL</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div></div></td></tr>
+          <tr><td class="bom-cat">Programming</td><td class="bom-item">Python — Pandas, NumPy</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div><div class="tick"></div><div class="tick"></div></div></td></tr>
+          <tr><td class="bom-cat">Domain</td><td class="bom-item">Financial planning &amp; analysis</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div><div class="tick"></div></div></td></tr>
+          <tr><td class="bom-cat">Domain</td><td class="bom-item">Operations &amp; project management</td><td><div class="ruler"><div class="tick fill"></div><div class="tick fill"></div><div class="tick fill"></div><div class="tick"></div><div class="tick"></div></div></td></tr>
+        </tbody>
+      </table>
+      <p class="placeholder-note" style="margin-top:14px;">[Adjust the rows and ruler fills above to match your actual confidence level in each skill]</p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head reveal">
+      <span class="sec-tag">03</span>
+      <span class="sec-title">Case files — projects</span>
+    </div>
+    <div class="case-grid reveal">
+
+      <div class="case">
+        <div class="case-id">CASE 001</div>
+        <div class="case-title">Bank marketing campaign — term deposit EDA</div>
+        <div class="case-tools"><span class="pill">Excel</span><span class="pill">Power BI</span><span class="pill">Statistics</span></div>
+        <p>Exploratory data analysis on a ~45,000-row bank telemarketing dataset from a 2017 term-deposit campaign. Built a multi-sheet Excel workbook for bivariate analysis (CORREL matrices, AVERAGEIF / COUNTIFS), created derived features such as age-group bins, and built Power BI DAX measures including percentage-of-total breakdowns.</p>
+        <div class="insight"><strong>Key finding:</strong> the outcome of the customer's previous campaign (Poutcome) was the strongest predictor of term-deposit subscription — translated into stakeholder-ready insights and recommendations.</div>
+        <a class="link" href="#">[Add link to dashboard / deck / GitHub] →</a>
+      </div>
+
+      <div class="case">
+        <div class="case-id">CASE 002</div>
+        <div class="case-title">Probability fundamentals in Python</div>
+        <div class="case-tools"><span class="pill">Python</span><span class="pill">Statistics</span></div>
+        <p>Working through core probability problems — including dice-roll outcome modelling for events like even products — to build a stronger statistical foundation ahead of applied analytics work.</p>
+        <div class="insight"><strong>Why it matters:</strong> a deliberate step from spreadsheet analysis toward programmatic, reproducible statistical reasoning.</div>
+        <a class="link" href="#">[Add link to notebook / repo] →</a>
+      </div>
+
+      <div class="case" style="border-style: dashed; border-color: var(--line);">
+        <div class="case-id" style="color: var(--muted);">CASE 003</div>
+        <div class="case-title" style="color: var(--muted);">[Add your next project]</div>
+        <p style="color: var(--muted);">Slot in a new case file here as you complete more analyses — a Power BI dashboard, a Python script, or a financial model. Keep the same format: tools used, what you did, and the headline insight.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head reveal">
+      <span class="sec-tag">04</span>
+      <span class="sec-title">Timeline — experience</span>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="t-role">Retail Operations</div>
+        <div class="t-org">Wildcraft India Limited</div>
+        <div class="t-date">[Add dates]</div>
+        <div class="t-desc">[Add 2–3 lines on what you owned — e.g. store-level operations, inventory accuracy, performance reporting, process improvements. Use numbers where you can.]</div>
+      </div>
+      <div class="t-item">
+        <div class="t-role">Operations Intern</div>
+        <div class="t-org">[Corrugated manufacturing firm name]</div>
+        <div class="t-date">[Add dates]</div>
+        <div class="t-desc">[Add 2–3 lines on production planning, process operations, or efficiency work you supported during the internship.]</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head reveal">
+      <span class="sec-tag">05</span>
+      <span class="sec-title">Credentials — education</span>
+    </div>
+    <div class="cred-list reveal">
+      <div class="cred">
+        <div><div class="cred-name">MBA, Finance &amp; Operations</div><div class="cred-org">[Institution name]</div></div>
+        <div class="cred-year">[Year]</div>
+      </div>
+      <div class="cred">
+        <div><div class="cred-name">BE, Mechanical Engineering</div><div class="cred-org">[Institution name]</div></div>
+        <div class="cred-year">[Year]</div>
+      </div>
+      <div class="cred">
+        <div><div class="cred-name">Professional Certificate, Business Analytics &amp; Consulting</div><div class="cred-org">UpGrad, in association with PwC Academy</div></div>
+        <div class="cred-year">In progress</div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="sec-head reveal">
+      <span class="sec-tag">06</span>
+      <span class="sec-title">Spec sheet — contact</span>
+    </div>
+    <div class="spec-frame reveal">
+      <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value">Bengaluru, India</span></div>
+      <div class="spec-row"><span class="spec-label">Email</span><span class="spec-value"><a href="mailto:your.email@example.com">your.email@example.com</a></span></div>
+      <div class="spec-row"><span class="spec-label">Phone</span><span class="spec-value">+91 [Add number]</span></div>
+      <div class="spec-row"><span class="spec-label">LinkedIn</span><span class="spec-value"><a href="#">linkedin.com/in/[add-handle]</a></span></div>
+      <div class="spec-row"><span class="spec-label">GitHub</span><span class="spec-value"><a href="#">github.com/[add-handle]</a></span></div>
+      <a class="resume-btn" href="resume.pdf">Download résumé →</a>
+      <div class="rev-stamp"><span>REV 01</span><span>JUNE 2026</span></div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){ links.classList.toggle('open'); });
+  links.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ links.classList.remove('open'); } });
+
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+
+</body>
+</html>

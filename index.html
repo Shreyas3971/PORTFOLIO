@@ -97,12 +97,25 @@
     font-family: var(--font-body); font-style: italic;
     font-size: 18px; color: var(--muted); margin-top: 10px; max-width: 520px;
   }
-  .tb-grid{
-    display: grid; grid-template-columns: repeat(4, 2fr);
-  }
-  .tb-cell{
-    padding: 14px 18px; border-right: 1px solid var(--line); border-top: 1px solid var(--line);
-  }
+.tb-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* vertical dividers between the three columns */
+.tb-row .tb-cell {
+  border-right: 1px solid #ccc;
+}
+
+.tb-row .tb-cell:last-child {
+  border-right: none;
+}
+
+/* stack on small screens */
+@media (max-width: 600px) {
+  .tb-row { grid-template-columns: 1fr; }
+  .tb-row .tb-cell { border-right: none; }
+}
   .tb-cell:nth-child(4n){ border-right: none; }
   .tb-label{
     font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.07em;
@@ -247,16 +260,26 @@
       <div class="tb-top">
         <div class="tb-eyebrow">Personal Portfolio - under development </div>
         <div class="tb-name">Shreyas S.H. </div>
-        <div class="tb-tagline">Analyst | Business | Finance | Operations | Data Analytics </div>
+        <div class="tb-tagline">Analyst | Business & Data Analytics </div>
       </div>
+  
+  <div class="tb-cell">
+    <div class="tb-label">Work Experience</div>
+    <div class="tb-value">Recent Role: Associate at Wildcraft India Limited </div>
+    <div class="tb-value">Functional area: Retail Sales & Operations</div>
+  </div>
+
   <div class="tb-cell">
     <div class="tb-label">Education</div>
     <div class="tb-value">Master of Business Administration (MBA) · Finance · Operations</div>
+    <div class="tb-value">Bachelor of Engineeing (BE) · Mechanical Engineering</div>
   </div>
+      
   <div class="tb-cell">
     <div class="tb-label">Based in</div>
-    <div class="tb-value">Bengaluru, KA</div>
+    <div class="tb-value">Bengaluru, Karnataka, India</div>
   </div>
+      
   <div class="tb-cell">
     <div class="tb-label">Email</div>
     <div class="tb-value"><a href="mailto:shshreyas3971@gmail.com">shshreyas3971@gmail.com</a></div>
@@ -269,6 +292,7 @@
     <div class="tb-label">GitHub</div>
     <div class="tb-value"><a href="https://github.com/Shreyas3971" target="_blank"><i class="fa-brands fa-github"></i> Shreyas3971</a></div>
   </div>
+      
 </div>
   </header>
 
